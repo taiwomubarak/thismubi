@@ -1,13 +1,25 @@
-# MUBI — React Portfolio
+# MUBI — React + TypeScript Portfolio
 
-Black & yellow “memory” aesthetic portfolio — Vite + React + React Router, with a live contact form via **Nodemailer + Gmail SMTP**.
+Black & yellow “memory” aesthetic portfolio — **Vite + React + TypeScript**, with a live contact form via **Nodemailer + Gmail SMTP**.
 
 ## Stack
 
-- **Frontend:** Vite, React, React Router, Three.js, CSS (design system + CSS modules for contact UI)
-- **Local API:** Express (`server/`) — used in development
-- **Production API:** Netlify Function (`netlify/functions/contact.js`) — same mail logic
+- **Frontend:** Vite, React, TypeScript, React Router, Three.js, PWA, CSS modules
+- **Shared:** `shared/contact.ts` — typed validation used by client + APIs
+- **Local API:** Express + Helmet + rate limit (`server/`) via `tsx`
+- **Production API:** Netlify Function (`netlify/functions/contact.ts`)
 - **Email:** Nodemailer → Gmail SMTP → `taiwomubarak63@gmail.com` (reply-to = visitor)
+
+## Secure contact wiring
+
+- Shared sanitize + validate (length, email, control-char strip)
+- Honeypot field (`website`) — bots get fake success
+- CORS allowlist via `ALLOWED_ORIGINS`
+- Rate limit (8 / 15 min per IP)
+- JSON Content-Type enforcement
+- Helmet (local API) + `nosniff` headers (Netlify)
+- HTML escaped in email body
+- Secrets only via env (never committed)
 
 ## Run locally
 
@@ -39,6 +51,7 @@ Gmail blocks normal passwords for SMTP. Use an **App Password**.
 GMAIL_USER=taiwomubarak63@gmail.com
 GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
 CONTACT_TO=taiwomubarak63@gmail.com
+ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080
 ```
 
 7. Restart `npm run dev`
@@ -53,23 +66,21 @@ Messages are sent **from** `GMAIL_USER`, **to** `CONTACT_TO`, with the visitor�
    - Build command: `npm run build`
    - Publish directory: `dist`
    - Functions directory: `netlify/functions`
-4. Site settings → **Environment variables** — add the same as `.env`:
+4. Site settings → **Environment variables**:
    - `GMAIL_USER`
    - `GMAIL_APP_PASSWORD`
    - `CONTACT_TO`
+   - `ALLOWED_ORIGINS` = `https://your-site.netlify.app` (and custom domain if any)
 5. Deploy
 
-`/api/contact` is redirected to the Netlify Function. SPA routes (`/about`, `/contact`, …) fall back to `index.html`.
-
-## Design preserved
-
-Preloader, custom cursor, grain/vignette, yellow hover stains, marquee, bouncing profile, Three.js hero, skills orbit, and handshake-gated contact — all kept.
+`/api/contact` is redirected to the Netlify Function. SPA routes fall back to `index.html`.
 
 ## Scripts
 
 | Command | What it does |
 |---------|----------------|
 | `npm run dev` | Express API + Vite client together |
-| `npm run server` | API only |
+| `npm run server` | Typed API only (`tsx`) |
 | `npm run dev:client` | Vite only |
-| `npm run build` | Production build → `dist/` |
+| `npm run typecheck` | `tsc` frontend + server |
+| `npm run build` | Typecheck + production build → `dist/` |

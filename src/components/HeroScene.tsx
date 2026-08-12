@@ -2,8 +2,12 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-export default function HeroScene({ onReady }) {
-  const hostRef = useRef(null);
+type HeroSceneProps = {
+  onReady?: () => void;
+};
+
+export default function HeroScene({ onReady }: HeroSceneProps) {
+  const hostRef = useRef<HTMLDivElement>(null);
   const onReadyRef = useRef(onReady);
   onReadyRef.current = onReady;
 
@@ -16,12 +20,13 @@ export default function HeroScene({ onReady }) {
 
     let disposed = false;
     let rafId = 0;
-    let renderer;
-    let controls;
-    let onMouseMove;
-    let onScroll;
-    let onResize;
-    let scene;
+    let renderer: THREE.WebGLRenderer | undefined;
+    let controls: OrbitControls | undefined;
+    let onMouseMove: ((e: MouseEvent) => void) | undefined;
+    let onScroll: (() => void) | undefined;
+    let onResize: (() => void) | undefined;
+    let scene: THREE.Scene | undefined;
+    let timer: THREE.Timer | undefined;
 
     try {
 scene = new THREE.Scene();
@@ -44,7 +49,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.2;
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = THREE.PCFShadowMap;
 canvasHost.appendChild(renderer.domElement);
 
 // Lights
@@ -586,11 +591,21 @@ const particles = new THREE.Points(particlesGeo, particlesMat);
 scene.add(particles);
 
 // ==== HUD DATA FRAGMENTS (floating text sprites) ====
-function createHudText(text, x, y, z, color = 0x00ffff, size = 0.06) {
+function createHudText(
+  text: string,
+  x: number,
+  y: number,
+  z: number,
+  color = 0x00ffff,
+  size = 0.06,
+) {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 96;
   const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, opacity: 0 }));
+  }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.font = 'bold 28px monospace';
   ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
@@ -622,6 +637,7 @@ const hud6 = createHudText('SUITLAB.PBR v3', 0.35, 1.0, -0.4, 0xffa500, 0.08);
 const hud7 = createHudText('▲ MEMORY FRAGMENT: FOUND', 0, 2.7, -0.2, 0xffa500, 0.07);
 const hud8 = createHudText('CANON EOS R5 / 85mm f1.2', -0.3, 0.6, 0.5, 0xffffff, 0.07);
 const hud9 = createHudText('LIVE: 記憶 (MEMORY)', 0.45, 0.8, 0.35, 0x00ffff, 0.09);
+[hud1, hud2, hud3, hud4, hud5, hud6, hud7, hud8, hud9].forEach((hud) => scene!.add(hud));
 
 // ==== ORBIT CONTROLS (slow auto-rotation) ====
 controls = new OrbitControls(camera, renderer.domElement);
@@ -640,7 +656,7 @@ controls.target.set(0, 1.2, 0);
 let mouseX = 0, mouseY = 0;
 let targetMouseX = 0, targetMouseY = 0;
 
-onMouseMove = (e) => {
+onMouseMove = (e: MouseEvent) => {
   targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
   targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
 };
@@ -654,14 +670,15 @@ onScroll = () => {
 window.addEventListener('scroll', onScroll);
 
 // ==== ANIMATION LOOP ====
-const clock = new THREE.Clock();
+timer = new THREE.Timer();
+timer.connect(document);
 
-function animate() {
+function animate(timestamp?: number) {
   if (disposed) return;
   rafId = requestAnimationFrame(animate);
 
-  const t = clock.getElapsedTime();
-  const delta = clock.getDelta();
+  if (timestamp !== undefined) timer!.update(timestamp);
+  const t = timer!.getElapsed();
 
   // Smooth mouse parallax
   mouseX += (targetMouseX - mouseX) * 0.05;
@@ -669,7 +686,7 @@ function animate() {
 
   // Camera parallax (subtle)
   camera.position.x += (mouseX * 0.25 - camera.position.x * 0.0) - (camera.position.x * 0.0);
-  controls.target.y = 1.2 - scrollY * 0.5;
+  controls!.target.y = 1.2 - scrollY * 0.5;
 
   // Pulses
   amberLight.intensity = 2.0 + Math.sin(t * 2) * 0.8;
@@ -682,9 +699,9 @@ function animate() {
   matAmber.emissiveIntensity = 0.6 + Math.sin(t * 2.2) * 0.4;
 
   // Particles drift
-  const posAttr = particles.geometry.attributes.position;
-  const colorAttr = particles.geometry.attributes.color;
-  const pos = posAttr.array;
+  const posAttr = particles.geometry.attributes.position as THREE.BufferAttribute;
+  const colorAttr = particles.geometry.attributes.color as THREE.BufferAttribute;
+  const pos = posAttr.array as Float32Array;
 
   for (let i = 0; i < particleCount; i++) {
     const idx = i * 3;
@@ -719,8 +736,8 @@ function animate() {
   hud7.position.y = 2.7 + Math.sin(t * 2) * 0.02;
   hud9.position.y = 0.8 + Math.cos(t * 1.8) * 0.015;
 
-  controls.update();
-  renderer.render(scene, camera);
+  controls!.update();
+  renderer!.render(scene!, camera);
 }
 
 animate();
@@ -729,7 +746,7 @@ animate();
 onResize = () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer!.setSize(window.innerWidth, window.innerHeight);
 };
 window.addEventListener('resize', onResize);
 
@@ -742,6 +759,7 @@ window.addEventListener('resize', onResize);
     return () => {
       disposed = true;
       if (rafId) cancelAnimationFrame(rafId);
+      timer?.disconnect();
       if (onMouseMove) window.removeEventListener('mousemove', onMouseMove);
       if (onScroll) window.removeEventListener('scroll', onScroll);
       if (onResize) window.removeEventListener('resize', onResize);
@@ -755,14 +773,15 @@ window.addEventListener('resize', onResize);
       try {
         if (scene) {
           scene.traverse((obj) => {
-            if (obj.geometry) obj.geometry.dispose?.();
-            if (obj.material) {
-              if (Array.isArray(obj.material)) obj.material.forEach((m) => m.dispose?.());
-              else obj.material.dispose?.();
+            const mesh = obj as THREE.Mesh;
+            if (mesh.geometry) mesh.geometry.dispose?.();
+            if (mesh.material) {
+              if (Array.isArray(mesh.material)) mesh.material.forEach((m) => m.dispose?.());
+              else (mesh.material as THREE.Material).dispose?.();
             }
           });
         }
-      } catch (_) {
+      } catch {
         /* ignore */
       }
     };

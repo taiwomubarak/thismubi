@@ -1,15 +1,16 @@
 import { Link, useOutletContext } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import BounceBox from '../components/BounceBox.jsx';
-import Footer from '../components/Footer.jsx';
-import Reveal from '../components/Reveal.jsx';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import BounceBox from '../components/BounceBox';
+import Footer from '../components/Footer';
+import Reveal from '../components/Reveal';
+import type { OutletContext } from '../components/Layout';
 
-const HeroScene = lazy(() => import('../components/HeroScene.jsx'));
+const HeroScene = lazy(() => import('../components/HeroScene'));
 
 export default function Home() {
   useDocumentTitle('MUBI — Home');
-  const { dismissPreloader } = useOutletContext() || {};
+  const { dismissPreloader } = useOutletContext<OutletContext>();
 
   return (
     <>

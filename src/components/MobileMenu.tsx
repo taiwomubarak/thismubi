@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
-const LINKS = [
+type MobileLink = {
+  to: string;
+  label: string;
+  end?: boolean;
+};
+
+const LINKS: MobileLink[] = [
   { to: '/', label: 'HOME', end: true },
   { to: '/about', label: 'ABOUT' },
   { to: '/skills', label: 'SKILLS' },
@@ -10,7 +16,12 @@ const LINKS = [
   { to: '/contact', label: 'CONTACT' },
 ];
 
-export default function MobileMenu({ open, onClose }) {
+type MobileMenuProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
     <div className={`mobile-menu${open ? ' open' : ''}`} id="mobile-menu">
       {LINKS.map((link) => (

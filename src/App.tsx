@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
-import Skills from './pages/Skills.jsx';
-import WhatIDo from './pages/WhatIDo.jsx';
-import Work from './pages/Work.jsx';
-import Process from './pages/Process.jsx';
-import Contact from './pages/Contact.jsx';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Skills from './pages/Skills';
+import WhatIDo from './pages/WhatIDo';
+import Work from './pages/Work';
+import Process from './pages/Process';
+import Contact from './pages/Contact';
 
 export default function App() {
   return (

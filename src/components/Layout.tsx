@@ -1,17 +1,19 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Nav from './Nav.jsx';
-import MobileMenu from './MobileMenu.jsx';
-import Preloader from './Preloader.jsx';
+import Nav from './Nav';
+import MobileMenu from './MobileMenu';
+import Preloader, { type PreloaderHandle } from './Preloader';
 import styles from '../styles/Layout.module.css';
+
+export type OutletContext = { dismissPreloader?: () => void };
 
 export default function Layout() {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const [menuOpen, setMenuOpen] = useState(false);
-  const preloaderRef = useRef(null);
-  const cursorDotRef = useRef(null);
-  const cursorRingRef = useRef(null);
+  const preloaderRef = useRef<PreloaderHandle>(null);
+  const cursorDotRef = useRef<HTMLDivElement>(null);
+  const cursorRingRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
@@ -59,7 +61,7 @@ export default function Layout() {
     let ringY = 0;
     let raf = 0;
 
-    const onMove = (e) => {
+    const onMove = (e: MouseEvent) => {
       cursorX = e.clientX;
       cursorY = e.clientY;
       cursorDot.style.left = `${cursorX}px`;
@@ -96,9 +98,9 @@ export default function Layout() {
     });
 
     const stainSelector = '.work-card, .capability-card, .portrait-frame, .btn, .service-row';
-    const stainEls = document.querySelectorAll(stainSelector);
-    const onStain = (e) => {
-      const card = e.currentTarget;
+    const stainEls = document.querySelectorAll<HTMLElement>(stainSelector);
+    const onStain = (e: MouseEvent) => {
+      const card = e.currentTarget as HTMLElement;
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--stain-x', `${e.clientX - rect.left}px`);
       card.style.setProperty('--stain-y', `${e.clientY - rect.top}px`);
@@ -115,13 +117,15 @@ export default function Layout() {
     );
     document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
-    const workArts = document.querySelectorAll('.work-art');
-    const onArtEnter = (e) => {
-      const label = e.currentTarget.querySelector('.work-art-label');
+    const workArts = document.querySelectorAll<HTMLElement>('.work-art');
+    const onArtEnter = (e: Event) => {
+      const target = e.currentTarget as HTMLElement;
+      const label = target.querySelector<HTMLElement>('.work-art-label');
       if (label) label.style.letterSpacing = '0.35em';
     };
-    const onArtLeave = (e) => {
-      const label = e.currentTarget.querySelector('.work-art-label');
+    const onArtLeave = (e: Event) => {
+      const target = e.currentTarget as HTMLElement;
+      const label = target.querySelector<HTMLElement>('.work-art-label');
       if (label) label.style.letterSpacing = '0.2em';
     };
     workArts.forEach((art) => {
@@ -148,7 +152,7 @@ export default function Layout() {
   useEffect(() => {
     const onScroll = () => {
       const vh = window.innerHeight;
-      document.querySelectorAll('.section-label').forEach((el) => {
+      document.querySelectorAll<HTMLElement>('.section-label').forEach((el) => {
         const rect = el.getBoundingClientRect();
         if (rect.top < vh && rect.bottom > 0) {
           el.style.transform = `translateX(${(rect.top + rect.height / 2 - vh / 2) * -0.1}px)`;
@@ -161,7 +165,7 @@ export default function Layout() {
 
   // Escape closes menu
   useEffect(() => {
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && menuOpen) closeMenu();
     };
     document.addEventListener('keydown', onKey);
@@ -171,6 +175,8 @@ export default function Layout() {
   const dismissPreloader = useCallback(() => {
     preloaderRef.current?.dismiss();
   }, []);
+
+  const outletContext: OutletContext = { dismissPreloader };
 
   return (
     <div className={styles.shell}>
@@ -184,7 +190,7 @@ export default function Layout() {
       <Nav menuOpen={menuOpen} onToggleMenu={toggleMenu} />
       <MobileMenu open={menuOpen} onClose={closeMenu} />
 
-      <Outlet context={{ dismissPreloader }} />
+      <Outlet context={outletContext} />
     </div>
   );
 }

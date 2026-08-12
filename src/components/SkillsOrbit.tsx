@@ -1,9 +1,22 @@
 import { useEffect, useRef } from 'react';
 
-const icon = (folder, file = `${folder}-original.svg`) =>
+const icon = (folder: string, file = `${folder}-original.svg`) =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${folder}/${file}`;
 
-const SHELLS = [
+type OrbitSkill = { name: string; src: string };
+
+type OrbitShell = {
+  id: string;
+  label: string;
+  radius: number;
+  duration: number;
+  reverse: boolean;
+  tilt: number;
+  squash: number;
+  skills: OrbitSkill[];
+};
+
+const SHELLS: OrbitShell[] = [
   {
     id: 'inner',
     label: 'Frontend',
@@ -53,22 +66,22 @@ const SHELLS = [
 ];
 
 export default function SkillsOrbit() {
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
 
     function build() {
-      root.querySelectorAll('.orbit-shell, .orbit-nucleus-ring').forEach((el) => el.remove());
+      root!.querySelectorAll('.orbit-shell, .orbit-nucleus-ring').forEach((el) => el.remove());
 
       const maxR = Math.max(...SHELLS.map((s) => s.radius));
-      root.style.setProperty('--orbit-size', `${maxR * 2 + 120}px`);
+      root!.style.setProperty('--orbit-size', `${maxR * 2 + 120}px`);
 
       const nuc = document.createElement('div');
       nuc.className = 'orbit-nucleus-ring';
       nuc.setAttribute('aria-hidden', 'true');
-      root.appendChild(nuc);
+      root!.appendChild(nuc);
 
       SHELLS.forEach((shell) => {
         const shellEl = document.createElement('div');
@@ -113,21 +126,21 @@ export default function SkillsOrbit() {
 
         shellEl.appendChild(path);
         shellEl.appendChild(spinner);
-        root.appendChild(shellEl);
+        root!.appendChild(shellEl);
       });
 
-      root.querySelectorAll('.orbit-electron').forEach((btn) => {
-        btn.addEventListener('mouseenter', () => root.classList.add('is-paused'));
-        btn.addEventListener('mouseleave', () => root.classList.remove('is-paused'));
-        btn.addEventListener('focus', () => root.classList.add('is-paused'));
-        btn.addEventListener('blur', () => root.classList.remove('is-paused'));
+      root!.querySelectorAll('.orbit-electron').forEach((btn) => {
+        btn.addEventListener('mouseenter', () => root!.classList.add('is-paused'));
+        btn.addEventListener('mouseleave', () => root!.classList.remove('is-paused'));
+        btn.addEventListener('focus', () => root!.classList.add('is-paused'));
+        btn.addEventListener('blur', () => root!.classList.remove('is-paused'));
       });
     }
 
     function fit() {
       const w = Math.min(window.innerWidth, 960);
       const scale = w < 720 ? (w < 480 ? 0.48 : 0.64) : 1;
-      root.style.setProperty('--orbit-scale', String(scale));
+      root!.style.setProperty('--orbit-scale', String(scale));
     }
 
     root.classList.remove('reveal');

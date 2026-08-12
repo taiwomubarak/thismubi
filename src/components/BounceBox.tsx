@@ -2,18 +2,18 @@ import { useEffect, useRef } from 'react';
 
 const GLOW_MS = 2000;
 
-function replayClass(el, className) {
+function replayClass(el: Element | null, className: string) {
   if (!el) return;
   el.classList.remove(className);
-  void el.offsetWidth;
+  void (el as HTMLElement).offsetWidth;
   el.classList.add(className);
 }
 
 export default function BounceBox() {
-  const arenaRef = useRef(null);
-  const boxRef = useRef(null);
-  const edgeRef = useRef(null);
-  const imgRef = useRef(null);
+  const arenaRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const edgeRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const bounceArena = arenaRef.current;
@@ -26,7 +26,7 @@ export default function BounceBox() {
     const aboutOwnerImg = document.getElementById('about-owner-img');
     const portraitGlow = document.getElementById('portrait-yellow-glow');
 
-    let glowTimeout = null;
+    let glowTimeout: ReturnType<typeof setTimeout> | null = null;
     let lastGlowTime = 0;
 
     function triggerWallGlow() {
@@ -63,10 +63,10 @@ export default function BounceBox() {
     let raf = 0;
 
     function measure() {
-      boxW = bounceBox.offsetWidth;
-      boxH = bounceBox.offsetHeight;
-      arenaW = bounceArena.clientWidth;
-      arenaH = bounceArena.clientHeight;
+      boxW = bounceBox!.offsetWidth;
+      boxH = bounceBox!.offsetHeight;
+      arenaW = bounceArena!.clientWidth;
+      arenaH = bounceArena!.clientHeight;
       x = Math.min(Math.max(0, x), Math.max(0, arenaW - boxW));
       y = Math.min(Math.max(0, y), Math.max(0, arenaH - boxH));
     }
@@ -79,11 +79,11 @@ export default function BounceBox() {
 
     const onResize = () => {
       measure();
-      bounceBox.style.transform = `translate(${x}px, ${y}px)`;
+      bounceBox!.style.transform = `translate(${x}px, ${y}px)`;
     };
     window.addEventListener('resize', onResize);
 
-    function tick(ts) {
+    function tick(ts: number) {
       if (!ready) {
         raf = requestAnimationFrame(tick);
         return;
@@ -118,7 +118,7 @@ export default function BounceBox() {
         hit = true;
       }
 
-      bounceBox.style.transform = `translate(${x}px, ${y}px)`;
+      bounceBox!.style.transform = `translate(${x}px, ${y}px)`;
       if (hit) triggerWallGlow();
 
       raf = requestAnimationFrame(tick);

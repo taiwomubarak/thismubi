@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import SkillsOrbit from '../components/SkillsOrbit.jsx';
-import Footer from '../components/Footer.jsx';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import SkillsOrbit from '../components/SkillsOrbit';
+import Footer from '../components/Footer';
 
 export default function Skills() {
   useDocumentTitle('Skills — MUBI');

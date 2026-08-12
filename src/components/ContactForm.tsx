@@ -1,33 +1,29 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import styles from '../styles/ContactForm.module.css';
+import { sendContactMessage } from '../lib/contactApi';
+
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export default function ContactForm() {
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState<FormStatus>('idle');
   const [message, setMessage] = useState('');
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      message: form.message.value.trim(),
+      name: String(formData.get('name') ?? '').trim(),
+      email: String(formData.get('email') ?? '').trim(),
+      message: String(formData.get('message') ?? '').trim(),
+      website: String(formData.get('website') ?? ''),
     };
 
     setStatus('sending');
     setMessage('');
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body.error || body.message || 'Failed to send message.');
-      }
+      await sendContactMessage(data);
 
       setStatus('success');
       setMessage('MESSAGE SENT — THANK YOU');
@@ -38,7 +34,7 @@ export default function ContactForm() {
       }, 2200);
     } catch (err) {
       setStatus('error');
-      setMessage(err.message || 'Something went wrong. Try again.');
+      setMessage(err instanceof Error ? err.message : 'Something went wrong. Try again.');
     }
   }
 
@@ -53,6 +49,14 @@ export default function ContactForm() {
       id="contact-form"
       onSubmit={handleSubmit}
     >
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: 'absolute', left: '-9999px' }}
+      />
       <div className="form-row">
         <label className="form-field">
           <span className="mono">NAME</span>

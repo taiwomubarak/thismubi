@@ -1,7 +1,14 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const LINKS = [
+type NavLinkItem = {
+  to: string;
+  label: string;
+  end?: boolean;
+  cta?: boolean;
+};
+
+const LINKS: NavLinkItem[] = [
   { to: '/', label: 'HOME', end: true },
   { to: '/about', label: 'ABOUT' },
   { to: '/skills', label: 'SKILLS' },
@@ -11,7 +18,12 @@ const LINKS = [
   { to: '/contact', label: 'CONTACT', cta: true },
 ];
 
-export default function Nav({ menuOpen, onToggleMenu }) {
+type NavProps = {
+  menuOpen: boolean;
+  onToggleMenu: () => void;
+};
+
+export default function Nav({ menuOpen, onToggleMenu }: NavProps) {
   const location = useLocation();
   const isHome = location.pathname === '/';
   const [scrolled, setScrolled] = useState(!isHome);

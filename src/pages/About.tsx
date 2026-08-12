@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import Footer from '../components/Footer.jsx';
-import Reveal from '../components/Reveal.jsx';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import Footer from '../components/Footer';
+import Reveal from '../components/Reveal';
 
 export default function About() {
   useDocumentTitle('About — MUBI');

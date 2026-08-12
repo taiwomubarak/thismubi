@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, type ReactNode } from 'react';
 
 const GLOW_MS = 2000;
 const SNAP = 42;
@@ -6,33 +6,41 @@ const SHOULDER = { x: 200, y: 210 };
 const HOME = { x: 280, y: 230 };
 const TARGET = { x: 360, y: 230 };
 
-function replay(el, cls) {
+type Point = { x: number; y: number };
+
+function replay(el: Element | null, cls: string) {
   if (!el) return;
   el.classList.remove(cls);
-  void el.offsetWidth;
+  void (el as HTMLElement).offsetWidth;
   el.classList.add(cls);
 }
 
-export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
+type HandshakeGateProps = {
+  onUnlock?: () => void;
+  onLeadChange?: (lead: string) => void;
+  children: ReactNode;
+};
+
+export default function HandshakeGate({ onUnlock, children, onLeadChange }: HandshakeGateProps) {
   const [unlocked, setUnlocked] = useState(false);
   const [hint, setHint] = useState('DRAG THE YELLOW HAND → TOUCH THE OTHER');
   const [shaken, setShaken] = useState(false);
   const [gateDone, setGateDone] = useState(false);
 
-  const svgRef = useRef(null);
-  const handRef = useRef(null);
-  const armPathRef = useRef(null);
-  const armLineRef = useRef(null);
-  const claspBurstRef = useRef(null);
-  const localGlowRef = useRef(null);
-  const unlockRef = useRef(null);
-  const stageRef = useRef(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const handRef = useRef<SVGGElement>(null);
+  const armPathRef = useRef<SVGPathElement>(null);
+  const armLineRef = useRef<SVGPathElement>(null);
+  const claspBurstRef = useRef<SVGGElement>(null);
+  const localGlowRef = useRef<HTMLDivElement>(null);
+  const unlockRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
-  const posRef = useRef({ ...HOME });
+  const posRef = useRef<Point>({ ...HOME });
   const draggingRef = useRef(false);
   const doneRef = useRef(false);
 
-  const setHand = useCallback((x, y) => {
+  const setHand = useCallback((x: number, y: number) => {
     posRef.current = { x, y };
     const hand = handRef.current;
     if (hand) hand.setAttribute('transform', `translate(${x} ${y})`);
@@ -41,7 +49,7 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
     armLineRef.current?.setAttribute('d', d);
   }, []);
 
-  const svgPoint = useCallback((clientX, clientY) => {
+  const svgPoint = useCallback((clientX: number, clientY: number): Point => {
     const svg = svgRef.current;
     if (!svg) return { ...HOME };
     const pt = svg.createSVGPoint();
@@ -53,7 +61,7 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
     return { x: local.x, y: local.y };
   }, []);
 
-  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  const dist = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
 
   const triggerYellowGlow = useCallback(() => {
     const screenGlow = document.getElementById('screen-glow');
@@ -92,7 +100,7 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
       requestAnimationFrame(() => {
         unlockRef.current?.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
         const first = unlockRef.current?.querySelector('input');
-        if (first) setTimeout(() => first.focus({ preventScroll: false }), 400);
+        if (first) setTimeout(() => (first as HTMLInputElement).focus({ preventScroll: false }), 400);
       });
       unlockRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 700);
@@ -103,17 +111,17 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
     const hand = handRef.current;
     if (!hand) return undefined;
 
-    function onPointerDown(e) {
+    function onPointerDown(e: PointerEvent) {
       if (doneRef.current) return;
       e.preventDefault();
       draggingRef.current = true;
-      hand.classList.add('is-dragging');
-      hand.setPointerCapture?.(e.pointerId);
+      hand!.classList.add('is-dragging');
+      hand!.setPointerCapture?.(e.pointerId);
       const p = svgPoint(e.clientX, e.clientY);
       setHand(p.x, p.y);
     }
 
-    function onPointerMove(e) {
+    function onPointerMove(e: PointerEvent) {
       if (!draggingRef.current || doneRef.current) return;
       e.preventDefault();
       const p = svgPoint(e.clientX, e.clientY);
@@ -126,7 +134,7 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
     function onPointerUp() {
       if (doneRef.current) return;
       draggingRef.current = false;
-      hand.classList.remove('is-dragging');
+      hand!.classList.remove('is-dragging');
       if (dist(posRef.current, TARGET) < SNAP) {
         unlockContact();
         return;
@@ -134,7 +142,7 @@ export default function HandshakeGate({ onUnlock, children, onLeadChange }) {
       setHand(HOME.x, HOME.y);
     }
 
-    function onKeyDown(e) {
+    function onKeyDown(e: KeyboardEvent) {
       if (doneRef.current) return;
       const step = e.shiftKey ? 12 : 6;
       const pos = posRef.current;

@@ -1,6 +1,19 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Footer({ extraLinks, copyright = '© 2026 MUBI', right }) {
+export type FooterLink = { to: string; label: string; external?: boolean };
+
+type FooterProps = {
+  extraLinks?: FooterLink[];
+  copyright?: string;
+  right?: ReactNode;
+};
+
+export default function Footer({
+  extraLinks,
+  copyright = '© 2026 MUBI',
+  right,
+}: FooterProps) {
   return (
     <footer className="site-footer-mini">
       <div className="container footer-mini-inner">

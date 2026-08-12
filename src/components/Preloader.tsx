@@ -1,8 +1,17 @@
 import { useEffect, useRef, useCallback, useImperativeHandle, forwardRef } from 'react';
 
-const Preloader = forwardRef(function Preloader({ onDismiss }, ref) {
+export type PreloaderHandle = { dismiss: () => void };
+
+type PreloaderProps = {
+  onDismiss?: () => void;
+};
+
+const Preloader = forwardRef<PreloaderHandle, PreloaderProps>(function Preloader(
+  { onDismiss },
+  ref,
+) {
   const dismissed = useRef(false);
-  const elRef = useRef(null);
+  const elRef = useRef<HTMLDivElement>(null);
 
   const dismiss = useCallback(() => {
     if (dismissed.current) return;

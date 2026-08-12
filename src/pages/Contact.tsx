@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import HandshakeGate from '../components/HandshakeGate.jsx';
-import ContactForm from '../components/ContactForm.jsx';
-import Footer from '../components/Footer.jsx';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import HandshakeGate from '../components/HandshakeGate';
+import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer';
 
 export default function Contact() {
   useDocumentTitle('Contact — MUBI');

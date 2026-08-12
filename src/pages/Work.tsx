@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import Footer from '../components/Footer.jsx';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import Footer from '../components/Footer';
 
 export default function Work() {
   useDocumentTitle('Work — MUBI');
