@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills — MUBI</title>
+  <meta name="description" content="Mubi tech stack — HTML, CSS, JS, TS, React, Vue, Vite, PHP, Laravel, Python, MEAN, MERN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body class="page-inner" data-page="skills">
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="site-nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Mubi home">
+        <img src="assets/logo.png" alt="mubi" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-hover>HOME</a>
+        <a href="about.html" class="nav-link" data-hover>ABOUT</a>
+        <a href="skills.html" class="nav-link is-active" data-hover>SKILLS</a>
+        <a href="what-i-do.html" class="nav-link" data-hover>WHAT I DO</a>
+        <a href="work.html" class="nav-link" data-hover>WORK</a>
+        <a href="process.html" class="nav-link" data-hover>PROCESS</a>
+        <a href="contact.html" class="nav-link nav-cta" data-hover>CONTACT</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="skills.html" class="is-active">SKILLS</a>
+    <a href="what-i-do.html">WHAT I DO</a>
+    <a href="work.html">WORK</a>
+    <a href="process.html">PROCESS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="section-label mono">02 / TECH STACK</div>
+      <h1 class="page-title">Skills in <em class="yellow-text">orbit</em>.</h1>
+        <p class="page-lead">Language icons orbit the core like electrons. Hover a node to pause.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section skills">
+      <div class="container">
+        <div class="skills-orbit-wrap" id="skills-orbit">
+          <div class="orbit-core">
+            <img src="assets/owner.png" alt="" class="orbit-core-img">
+            <span class="orbit-core-label mono">SKILLS</span>
+          </div>
+        </div>
+
+        <ul class="skills-legend mono reveal" aria-label="Skill rings">
+          <li><span class="legend-dot legend-inner"></span> Inner — Frontend</li>
+          <li><span class="legend-dot legend-mid"></span> Mid — Frameworks</li>
+          <li><span class="legend-dot legend-outer"></span> Outer — Backend / Stacks</li>
+        </ul>
+
+        <div class="page-actions reveal" style="justify-content:center;margin-top:2.5rem">
+          <a href="what-i-do.html" class="btn btn-yellow" data-hover>WHAT I DO</a>
+          <a href="work.html" class="btn btn-ghost" data-hover>SEE WORK</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-mini">
+    <div class="container footer-mini-inner">
+      <span class="mono">© 2026 MUBI</span>
+      <a href="contact.html" class="mono">CONTACT →</a>
+    </div>
+  </footer>
+
+  <script defer src="js/skills-orbit.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>

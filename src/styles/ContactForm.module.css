@@ -1,0 +1,23 @@
+/* Contact form status — CSS module */
+
+.form.sending :global(button),
+.sending :global(button) {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.status {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  min-height: 1.2em;
+}
+
+.success {
+  color: var(--yellow);
+}
+
+.error {
+  color: #ff6b6b;
+}

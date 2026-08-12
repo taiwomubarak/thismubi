@@ -1,0 +1,5 @@
+/* Layout shell helpers (CSS module) */
+.shell {
+  /* marker class for the app shell */
+  min-height: 100%;
+}

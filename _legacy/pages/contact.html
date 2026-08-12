@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — MUBI</title>
+  <meta name="description" content="Contact Mubi — web developer and app maker. Let's build something.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body class="page-inner" data-page="contact">
+
+  <div id="screen-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="site-nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Mubi home">
+        <img src="assets/logo.png" alt="mubi" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-hover>HOME</a>
+        <a href="about.html" class="nav-link" data-hover>ABOUT</a>
+        <a href="skills.html" class="nav-link" data-hover>SKILLS</a>
+        <a href="what-i-do.html" class="nav-link" data-hover>WHAT I DO</a>
+        <a href="work.html" class="nav-link" data-hover>WORK</a>
+        <a href="process.html" class="nav-link" data-hover>PROCESS</a>
+        <a href="contact.html" class="nav-link nav-cta is-active" data-hover>CONTACT</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="skills.html">SKILLS</a>
+    <a href="what-i-do.html">WHAT I DO</a>
+    <a href="work.html">WORK</a>
+    <a href="process.html">PROCESS</a>
+    <a href="contact.html" class="is-active">CONTACT</a>
+  </div>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="section-label mono">07 / CONTACT</div>
+      <h1 class="page-title">Meet in the <em class="yellow-text">middle</em>.</h1>
+      <p class="page-lead" id="handshake-lead">
+        Drag one soul’s hand to the other. Handshake to unlock contact.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section contact-page">
+      <div class="container">
+
+        <!-- Handshake gate -->
+        <div class="handshake-gate" id="handshake-gate" aria-live="polite">
+          <div class="handshake-stage" id="handshake-stage">
+            <div class="handshake-glow" id="handshake-glow" aria-hidden="true"></div>
+
+            <!-- TWO SOULS SVG -->
+            <svg
+              class="souls-svg"
+              id="souls-svg"
+              viewBox="0 0 640 360"
+              role="img"
+              aria-label="Two souls ready to handshake. Drag the left hand to the right hand."
+            >
+              <defs>
+                <radialGradient id="soulGlowA" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#fce83a" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#fce83a" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="soulGlowB" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#fce83a" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#fce83a" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="softYellow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="4" result="b"/>
+                  <feMerge>
+                    <feMergeNode in="b"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- ambient -->
+              <circle cx="170" cy="160" r="90" fill="url(#soulGlowA)" opacity="0.5"/>
+              <circle cx="470" cy="160" r="90" fill="url(#soulGlowB)" opacity="0.5"/>
+
+              <!-- LEFT SOUL (visitor) -->
+              <g class="soul soul-left" id="soul-left">
+                <!-- body -->
+                <ellipse cx="170" cy="230" rx="42" ry="58" fill="#141414" stroke="#2a2a2a" stroke-width="2"/>
+                <ellipse cx="170" cy="230" rx="28" ry="40" fill="none" stroke="#fce83a" stroke-opacity="0.18" stroke-width="1"/>
+                <!-- head -->
+                <circle cx="170" cy="145" r="36" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <circle cx="170" cy="145" r="22" fill="none" stroke="#fce83a" stroke-opacity="0.25" stroke-width="1"/>
+                <!-- face marks -->
+                <circle cx="158" cy="142" r="2.5" fill="#9a9a9a"/>
+                <circle cx="182" cy="142" r="2.5" fill="#9a9a9a"/>
+                <path d="M160 158 Q170 166 180 158" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- neck -->
+                <rect x="162" y="178" width="16" height="14" rx="4" fill="#1a1a1a"/>
+                <!-- left arm (idle) -->
+                <path d="M140 210 Q118 230 112 268" fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linecap="round"/>
+                <path d="M140 210 Q118 230 112 268" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+                <!-- right arm stump to movable hand -->
+                <path
+                  id="arm-left-path"
+                  d="M200 210 Q240 220 280 230"
+                  fill="none"
+                  stroke="#2a2a2a"
+                  stroke-width="10"
+                  stroke-linecap="round"
+                />
+                <path
+                  id="arm-left-path-line"
+                  d="M200 210 Q240 220 280 230"
+                  fill="none"
+                  stroke="#666"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <text x="170" y="320" text-anchor="middle" class="soul-caption">YOU</text>
+              </g>
+
+              <!-- RIGHT SOUL (mubi) -->
+              <g class="soul soul-right" id="soul-right">
+                <ellipse cx="470" cy="230" rx="42" ry="58" fill="#141414" stroke="#2a2a2a" stroke-width="2"/>
+                <ellipse cx="470" cy="230" rx="28" ry="40" fill="none" stroke="#fce83a" stroke-opacity="0.18" stroke-width="1"/>
+                <circle cx="470" cy="145" r="36" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <circle cx="470" cy="145" r="22" fill="none" stroke="#fce83a" stroke-opacity="0.25" stroke-width="1"/>
+                <circle cx="458" cy="142" r="2.5" fill="#9a9a9a"/>
+                <circle cx="482" cy="142" r="2.5" fill="#9a9a9a"/>
+                <path d="M460 158 Q470 166 480 158" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="462" y="178" width="16" height="14" rx="4" fill="#1a1a1a"/>
+                <!-- right idle arm -->
+                <path d="M500 210 Q522 230 528 268" fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linecap="round"/>
+                <path d="M500 210 Q522 230 528 268" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+                <!-- left arm toward center (target) -->
+                <path d="M440 210 Q400 220 360 230" fill="none" stroke="#2a2a2a" stroke-width="10" stroke-linecap="round"/>
+                <path d="M440 210 Q400 220 360 230" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                <!-- target hand -->
+                <g id="hand-target" transform="translate(360 230)">
+                  <circle r="18" fill="#0c0c0c" stroke="#fce83a" stroke-width="2" stroke-opacity="0.55"/>
+                  <circle r="8" fill="#fce83a" fill-opacity="0.25"/>
+                  <path d="M-6 -4 L6 -4 M-6 2 L6 2 M-4 8 L4 8" stroke="#fce83a" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                </g>
+                <text x="470" y="320" text-anchor="middle" class="soul-caption">MUBI</text>
+              </g>
+
+              <!-- DRAGGABLE HAND (left soul) -->
+              <g id="hand-drag" class="hand-drag" transform="translate(280 230)" tabindex="0" role="button" aria-label="Drag this hand to Mubi's hand">
+                <circle class="hand-hit" r="26" fill="transparent"/>
+                <circle class="hand-body" r="18" fill="#111" stroke="#fce83a" stroke-width="2.5"/>
+                <circle r="7" fill="#fce83a" fill-opacity="0.35"/>
+                <path d="M-6 -4 L6 -4 M-6 2 L6 2 M-4 8 L4 8" stroke="#fce83a" stroke-width="1.6" stroke-linecap="round"/>
+                <circle class="hand-pulse" r="22" fill="none" stroke="#fce83a" stroke-opacity="0.35"/>
+              </g>
+
+              <!-- clasp burst (hidden until shake) -->
+              <g id="clasp-burst" class="clasp-burst" opacity="0" pointer-events="none">
+                <circle cx="320" cy="230" r="28" fill="#fce83a" fill-opacity="0.35" filter="url(#softYellow)"/>
+                <circle cx="320" cy="230" r="10" fill="#fce83a"/>
+              </g>
+            </svg>
+
+            <p class="handshake-hint mono" id="handshake-hint">
+              DRAG THE YELLOW HAND → TOUCH THE OTHER
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact unlocks after handshake -->
+        <div class="contact-unlock" id="contact-unlock" hidden aria-hidden="true">
+          <div class="contact-unlocked-banner mono reveal">
+            <span>HANDSHAKE COMPLETE</span>
+            <span class="yellow-text">· CHANNEL OPEN</span>
+          </div>
+
+          <form class="contact-form reveal" id="contact-form" action="#" method="post">
+            <div class="form-row">
+              <label class="form-field">
+                <span class="mono">NAME</span>
+                <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+              </label>
+              <label class="form-field">
+                <span class="mono">EMAIL</span>
+                <input type="email" name="email" placeholder="you@studio.com" required autocomplete="email">
+              </label>
+            </div>
+            <label class="form-field">
+              <span class="mono">MESSAGE</span>
+              <textarea name="message" rows="5" placeholder="Tell me what you need built…" required></textarea>
+            </label>
+            <button type="submit" class="btn btn-yellow" data-hover>SEND MESSAGE</button>
+          </form>
+
+          <a href="mailto:hello@mubi.dev" class="footer-email reveal" data-hover>HELLO@MUBI.DEV</a>
+          <div class="footer-socials reveal">
+            <a href="#" class="footer-link mono" data-hover>GITHUB</a>
+            <a href="#" class="footer-link mono" data-hover>LINKEDIN</a>
+            <a href="#" class="footer-link mono" data-hover>TWITTER / X</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-mini">
+    <div class="container footer-mini-inner">
+      <span class="mono">© 2026 MUBI — ALL RIGHTS RESERVED</span>
+      <span class="mono">WEB DEV · APP MAKER · FUTURE MD</span>
+    </div>
+  </footer>
+
+  <script defer src="js/handshake.js"></script>
+  <script defer src="js/main.js"></script>
+</body>
+</html>

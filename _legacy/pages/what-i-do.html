@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What I Do — MUBI</title>
+  <meta name="description" content="What Mubi does — web development, full-stack apps, software design, fast-shipping tools.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body class="page-inner" data-page="what-i-do">
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="site-nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Mubi home">
+        <img src="assets/logo.png" alt="mubi" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-hover>HOME</a>
+        <a href="about.html" class="nav-link" data-hover>ABOUT</a>
+        <a href="skills.html" class="nav-link" data-hover>SKILLS</a>
+        <a href="what-i-do.html" class="nav-link is-active" data-hover>WHAT I DO</a>
+        <a href="work.html" class="nav-link" data-hover>WORK</a>
+        <a href="process.html" class="nav-link" data-hover>PROCESS</a>
+        <a href="contact.html" class="nav-link nav-cta" data-hover>CONTACT</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="skills.html">SKILLS</a>
+    <a href="what-i-do.html" class="is-active">WHAT I DO</a>
+    <a href="work.html">WORK</a>
+    <a href="process.html">PROCESS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="section-label mono">03 / WHAT I DO</div>
+      <h1 class="page-title">What I <em class="yellow-text">ship</em>.</h1>
+      <p class="page-lead">From websites and apps to full-stack systems — designed clean, coded fast.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section what-i-do">
+      <div class="container">
+        <div class="services-grid">
+          <article class="service-row reveal" data-hover>
+            <span class="service-index mono">01</span>
+            <div class="service-body">
+              <h3>Web Development</h3>
+              <p>Responsive sites and web apps with HTML, CSS, JS/TS, React, Vue, and Vite — fast, modern, and maintainable.</p>
+            </div>
+            <span class="service-tag mono">FRONTEND</span>
+          </article>
+          <article class="service-row reveal" data-hover>
+            <span class="service-index mono">02</span>
+            <div class="service-body">
+              <h3>Full-Stack Apps</h3>
+              <p>MEAN &amp; MERN systems, PHP/Laravel backends, APIs, auth, and databases that hold up under real use.</p>
+            </div>
+            <span class="service-tag mono">MEAN / MERN</span>
+          </article>
+          <article class="service-row reveal" data-hover>
+            <span class="service-index mono">03</span>
+            <div class="service-body">
+              <h3>Software &amp; App Design</h3>
+              <p>Product thinking and UI that feels intentional — I design the tool, then I build it.</p>
+            </div>
+            <span class="service-tag mono">DESIGN</span>
+          </article>
+          <article class="service-row reveal" data-hover>
+            <span class="service-index mono">04</span>
+            <div class="service-body">
+              <h3>Tools That Ship</h3>
+              <p>Python scripts, admin panels, dashboards, and small products shipped quick — useful over perfect.</p>
+            </div>
+            <span class="service-tag mono">PYTHON</span>
+          </article>
+        </div>
+        <div class="page-actions reveal" style="margin-top:3rem">
+          <a href="work.html" class="btn btn-yellow" data-hover>SEE WORK</a>
+          <a href="contact.html" class="btn btn-ghost" data-hover>HIRE ME</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-mini">
+    <div class="container footer-mini-inner">
+      <span class="mono">© 2026 MUBI</span>
+      <a href="contact.html" class="mono">CONTACT →</a>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>

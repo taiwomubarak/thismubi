@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — MUBI</title>
+  <meta name="description" content="Selected work by Mubi — MERN, Laravel, Vue, med-tech experiments.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body class="page-inner" data-page="work">
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="site-nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Mubi home">
+        <img src="assets/logo.png" alt="mubi" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-hover>HOME</a>
+        <a href="about.html" class="nav-link" data-hover>ABOUT</a>
+        <a href="skills.html" class="nav-link" data-hover>SKILLS</a>
+        <a href="what-i-do.html" class="nav-link" data-hover>WHAT I DO</a>
+        <a href="work.html" class="nav-link is-active" data-hover>WORK</a>
+        <a href="process.html" class="nav-link" data-hover>PROCESS</a>
+        <a href="contact.html" class="nav-link nav-cta" data-hover>CONTACT</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">HOME</a>
+    <a href="about.html">ABOUT</a>
+    <a href="skills.html">SKILLS</a>
+    <a href="what-i-do.html">WHAT I DO</a>
+    <a href="work.html" class="is-active">WORK</a>
+    <a href="process.html">PROCESS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="section-label mono">04 / SELECTED WORK</div>
+      <h1 class="page-title">Built to <em class="yellow-text">move</em>.</h1>
+      <p class="page-lead">Projects and experiments that show how I ship.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section work">
+      <div class="container">
+        <div class="work-grid">
+          <a href="contact.html" class="work-card reveal" data-hover>
+            <div class="work-card-media"><div class="work-art wa-1"><span class="work-art-label mono">MERN.KIT</span></div></div>
+            <div class="work-card-info">
+              <span class="work-index">001</span>
+              <h3>MERN STARTER KIT</h3>
+              <p>Opinionated full-stack starter — auth, API layer, and a React UI ready to ship from day one.</p>
+              <span class="work-tags mono">MONGODB / EXPRESS / REACT / NODE</span>
+            </div>
+          </a>
+          <a href="contact.html" class="work-card reveal" data-hover>
+            <div class="work-card-media"><div class="work-art wa-2"><span class="work-art-label mono">LARAVEL.API</span></div></div>
+            <div class="work-card-info">
+              <span class="work-index">002</span>
+              <h3>LARAVEL SERVICE LAYER</h3>
+              <p>Clean PHP/Laravel APIs with auth, queues, and SQL — built for real products, not demos.</p>
+              <span class="work-tags mono">PHP / LARAVEL / SQL</span>
+            </div>
+          </a>
+          <a href="contact.html" class="work-card reveal" data-hover>
+            <div class="work-card-media"><div class="work-art wa-3"><span class="work-art-label mono">VUE.VITE</span></div></div>
+            <div class="work-card-info">
+              <span class="work-index">003</span>
+              <h3>VUE + VITE DASHBOARD</h3>
+              <p>Admin dashboard with TypeScript, Vite speed, and a UI that stays readable under pressure.</p>
+              <span class="work-tags mono">VUE / VITE / TYPESCRIPT</span>
+            </div>
+          </a>
+          <a href="contact.html" class="work-card reveal" data-hover>
+            <div class="work-card-media"><div class="work-art wa-4"><span class="work-art-label mono">MED.TOOLS</span></div></div>
+            <div class="work-card-info">
+              <span class="work-index">004</span>
+              <h3>MED-TECH EXPERIMENTS</h3>
+              <p>Early tools exploring how software can support medicine, patient reach, and drug-related workflows.</p>
+              <span class="work-tags mono">PYTHON / JS / HEALTH</span>
+            </div>
+          </a>
+        </div>
+        <div class="work-more reveal">
+          <a href="contact.html" class="btn btn-ghost" data-hover>START A PROJECT →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-mini">
+    <div class="container footer-mini-inner">
+      <span class="mono">© 2026 MUBI</span>
+      <a href="contact.html" class="mono">CONTACT →</a>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>

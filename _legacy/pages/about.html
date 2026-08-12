@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — MUBI</title>
+  <meta name="description" content="About Mubi — web developer, software designer, science student aiming for medicine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body class="page-inner" data-page="about">
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="site-nav" class="scrolled">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Mubi home">
+        <img src="assets/logo.png" alt="mubi" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link" data-hover>HOME</a>
+        <a href="about.html" class="nav-link is-active" data-hover>ABOUT</a>
+        <a href="skills.html" class="nav-link" data-hover>SKILLS</a>
+        <a href="what-i-do.html" class="nav-link" data-hover>WHAT I DO</a>
+        <a href="work.html" class="nav-link" data-hover>WORK</a>
+        <a href="process.html" class="nav-link" data-hover>PROCESS</a>
+        <a href="contact.html" class="nav-link nav-cta" data-hover>CONTACT</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">HOME</a>
+    <a href="about.html" class="is-active">ABOUT</a>
+    <a href="skills.html">SKILLS</a>
+    <a href="what-i-do.html">WHAT I DO</a>
+    <a href="work.html">WORK</a>
+    <a href="process.html">PROCESS</a>
+    <a href="contact.html">CONTACT</a>
+  </div>
+
+  <header class="page-hero">
+    <div class="container">
+      <div class="section-label mono">01 / ABOUT</div>
+      <h1 class="page-title">Code today. <em class="yellow-text">Medicine</em> tomorrow.</h1>
+      <p class="page-lead">Web developer · software designer · app maker · science student</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-portrait reveal">
+            <div class="portrait-frame" id="portrait-frame">
+              <div class="portrait-art">
+                <img src="assets/owner.png" alt="Mubi" class="portrait-img" id="about-owner-img">
+                <div class="portrait-yellow-glow" id="portrait-yellow-glow"></div>
+                <div class="portrait-line pl-1"></div>
+                <div class="portrait-line pl-2"></div>
+                <div class="portrait-line pl-3"></div>
+                <div class="portrait-glow pg-1"></div>
+                <div class="portrait-glow pg-2"></div>
+              </div>
+              <div class="portrait-caption mono">FIG.01 — MUBI · BUILDER</div>
+            </div>
+          </div>
+          <div class="about-content">
+            <p class="section-text reveal">
+              I'm Mubi — a web developer, software designer, and app maker. I live in the stack:
+              Python, HTML, CSS, JavaScript, TypeScript, PHP, Laravel, React, Vite, Vue —
+              and I'm solid on both MEAN and MERN.
+            </p>
+            <p class="section-text reveal">
+              I'm a science student aiming for a doctor's course. My long game is big:
+              use technological knowledge in medicine — to reach people, understand drugs,
+              and build systems that actually help treat and heal.
+            </p>
+            <p class="section-text reveal">
+              Until then, I ship tools fast. Clean products. Working software. No waiting around.
+            </p>
+            <div class="about-stats">
+              <div class="stat reveal"><span class="stat-num">FULL</span><span class="stat-label">STACK<br>BUILDER</span></div>
+              <div class="stat reveal"><span class="stat-num">FAST</span><span class="stat-label">TOOL<br>SHIPPER</span></div>
+              <div class="stat reveal"><span class="stat-num">MD</span><span class="stat-label">PATH<br>AHEAD</span></div>
+            </div>
+            <div class="page-actions reveal">
+              <a href="skills.html" class="btn btn-yellow" data-hover>VIEW SKILLS</a>
+              <a href="contact.html" class="btn btn-ghost" data-hover>CONTACT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-mini">
+    <div class="container footer-mini-inner">
+      <span class="mono">© 2026 MUBI</span>
+      <div class="footer-mini-links">
+        <a href="skills.html" class="mono">SKILLS</a>
+        <a href="contact.html" class="mono">CONTACT →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js"></script>
+</body>
+</html>
